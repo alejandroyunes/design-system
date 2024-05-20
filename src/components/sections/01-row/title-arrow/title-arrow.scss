@@ -1,0 +1,40 @@
+.title-arrow-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  margin: 32px auto 8px;
+  justify-content: center;
+
+  .title {
+    font-size: 32px;
+    color: var(--color-heading);
+
+    @media (max-width: 900px) {
+      font-size: 24px;
+    }
+  }
+
+  .arrow {
+    display: flex;
+    justify-content: center;
+    // animation-name: pointingDown;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes pointingDown {
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(15px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}

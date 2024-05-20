@@ -1,0 +1,77 @@
+@import './base.scss';
+
+#app {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  // padding: 0 20px;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  a {
+    text-decoration: none;
+    color: transparent;
+  }
+
+  @media (hover: hover) {
+    a:hover {
+      background-color: transparent;
+    }
+  }
+
+  .icon {
+    cursor: pointer;
+    #path-1 {
+      stroke: var(--color-background-oposite);
+    }
+    #path-2 {
+      fill: var(--color-background-oposite);
+    }
+    #path-3 {
+      fill: var(--color-background);
+    }
+    #path-4 {
+      stroke: var(--color-background);
+    }
+  }
+
+  .primary {
+    color: var(--primary);
+  }
+
+  .desktop-only {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .mobile-only {
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+}
