@@ -1,37 +1,32 @@
 <script lang="ts" setup>
 import './docs.scss'
 import { ref, reactive } from 'vue'
+
 import ArrowDownSvg from '@/components/icons/ArrowDownSvg.vue'
 import ArrowDoubleTwoSvg from '@/components/icons/ArrowDoubleTwoSvg.vue'
-import HouseSvg from '@/components/icons/nav/HouseSvg.vue'
-import FolderSvg from '@/components/icons/nav/FolderSvg.vue'
-import AddSvg from '@/components/icons/nav/AddSvg.vue'
-import ApiSvg from '@/components/icons/nav/ApiSvg.vue'
-import TitleArrow from '@/components/sections/01-row/title-arrow/TitleArrow.vue'
-import { useRoute } from 'vue-router'
+import LeftSideBar from '@/components/nav/left-sidebar/LeftSideBar.vue'
 
 interface SubSubMenu {
-  name: string;
-  content: string;
+  name: string
+  content: string[]
+  code?: boolean
 }
 
 interface SubMenu {
-  name: string;
-  expanded: boolean;
-  subsubmenus: SubSubMenu[];
+  name: string
+  expanded: boolean
+  subsubmenus: SubSubMenu[]
 }
 
 interface Section {
-  name: string;
-  description: string;
-  welcomeMessage: string;
-  expanded: boolean;
-  submenus: SubMenu[];
+  breadcrum: string
+  title: string
+  description: string
+  expanded: boolean
+  submenus: SubMenu[]
 }
 
-const route = useRoute()
 
-const path = ref(route.path)
 const navToggle = ref<boolean | undefined>(undefined)
 
 let selectedSection: Section | null = null
@@ -42,118 +37,68 @@ let showMessage = true
 
 const sections: Section[] = reactive([
   {
-    name: 'EC2 + Nginx',
+    breadcrum: 'EC2 + Nginx',
+    title: 'Creation of AWS EC2 instance',
     description: 'The following information is intended to help implement an instance of EC2 with Nginx.',
-    welcomeMessage: 'Welcome to EC2 + Nginx!',
     expanded: false,
     submenus: [
       {
-        name: 'Creating EC2 instance',
+        name: 'Create a EC2 instance',
         expanded: false,
         subsubmenus: [
           {
-            name: 'Installation',
-            content: `- yum install nginx
-- configure nginx.confi file
-- start nginx <sudo systemctl start nginx`
+            name: 'Create Instance',
+            content: ["- Create an Amazon Linux 2 instance.", "- Log in to the AWS Management Console and ensure you've selected the desired region before launching the instance."]
           },
-          { name: 'Header Logo Left', content: 'Console.log(hello)' },
+          { name: 'Configuration', content: ['- Launch the Amazon Linux server, select the desired memory and disc memory, and finally create the .pem file.'] },
+        ]
+      },
+      {
+        name: 'Dev installations',
+        expanded: false,
+        subsubmenus: [
+          {
+            name: 'Dependencies', code: true, content: ['- sudo yum install -y nginx-<version>', '- sudo yum install npm -g (bun or pnpm)', '- sudo yum install nvm', '- nvm install 20.1.1', '- bun install pm2']
+          }
+        ]
+      }
+    ]
+  },
+  {
+    breadcrum: 'Fast Api',
+    title: 'Installation of tools',
+    description: 'The following information is intended to help implement Fast API.',
+    expanded: false,
+    submenus: [
+      {
+        name: 'Installation',
+        expanded: false,
+        subsubmenus: [
+          {
+            name: 'Python',
+            content: ['- Download the official installer from https://www.python.org/downloads/', '- Verify installation: Open a command prompt or terminal window and type python']
+          },
+          {
+            name: 'Fast API',
+            content: ['- yum install nginx', '- configure nginx.confi file', '- start nginx <sudo systemctl start nginx']
+          },
+          { name: 'Header Logo Left', content: ['Console.log(hello)'] },
         ]
       },
       {
         name: '2 row',
         expanded: false,
         subsubmenus: [
-          { name: 'Text Title', content: 'console.log(hello)' },
-          { name: 'Logo Title Hamburger', content: 'console.log(hello)' }
+          { name: 'Text Title', content: ['Console.log(hello)'] },
+          { name: 'Logo Title Hamburger', content: ['Console.log(hello)'] }
         ]
       },
       {
         name: '3 row',
         expanded: false,
         subsubmenus: [
-          { name: 'Logo centered', content: 'console.log(hello)' },
-          { name: 'Top Fixed Hamburger', content: 'console.log(hello)' }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Billboards',
-    description: 'lorem ipsum dolor sit amet consectetur adipiscing elit.',
-    welcomeMessage: 'Welcome to Billboards!',
-    expanded: false,
-    submenus: [
-      {
-        name: '1 row',
-        expanded: false,
-        subsubmenus: [
-          { name: 'Image Left Top', content: 'console.log(hello)' },
-          { name: 'Right Text Image', content: 'console.log(hello)' }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Sections',
-    description: 'Here you can find all the sections widgets.',
-    welcomeMessage: 'Welcome to Section Widgets!',
-    expanded: false,
-    submenus: [
-      {
-        name: '1 row',
-        expanded: false,
-        subsubmenus: [
-          { name: 'cookies-compliance', content: 'console.log(hello)' },
-          { name: 'partners', content: 'console.log(hello)' }
-        ]
-      },
-      {
-        name: '2 row',
-        expanded: false,
-        subsubmenus: [
-          { name: 'get-in-touch', content: 'console.log(hello)' },
-          { name: 'mission-vission', content: 'console.log(hello)' }
-        ]
-      },
-      {
-        name: '3 row',
-        expanded: false,
-        subsubmenus: [
-          { name: 'ceo-description', content: 'console.log(hello)' },
-          { name: 'main-link-icons', content: 'console.log(hello)' }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Sliders',
-    description: 'Description for Sliders',
-    welcomeMessage: 'lorem ipsum dolor sit amet consectetur adipiscing elit.',
-    expanded: false,
-    submenus: [
-      {
-        name: '1 row',
-        expanded: false,
-        subsubmenus: [
-          { name: 'Image Right', content: 'console.log(hello)' },
-          { name: 'Header Logo Left', content: 'Console.log(hello)' },
-        ]
-      },
-      {
-        name: '2 row',
-        expanded: false,
-        subsubmenus: [
-          { name: 'Text Title', content: 'console.log(hello)' },
-          { name: 'Logo Title Hamburger', content: 'console.log(hello)' }
-        ]
-      },
-      {
-        name: '3 row',
-        expanded: false,
-        subsubmenus: [
-          { name: 'Logo centered', content: 'console.log(hello)' },
-          { name: 'Top Fixed Hamburger', content: 'console.log(hello)' }
+          { name: 'Logo centered', content: ['Console.log(hello)'] },
+          { name: 'Top Fixed Hamburger', content: ['Console.log(hello)'] }
         ]
       }
     ]
@@ -173,7 +118,7 @@ function toggleSection(index: number) {
 
   selectedSection = section
   selectedSubmenu = null
-  breadcrumb.value = section.name
+  breadcrumb.value = section.breadcrum
   showMessage = false
 }
 
@@ -184,10 +129,10 @@ function toggleSubmenu(sectionIndex: number, submenuIndex: number) {
 
   if (submenu.expanded) {
     submenu.expanded = false
-    breadcrumb.value = section.name
+    breadcrumb.value = section.breadcrum
   } else {
     submenu.expanded = true
-    breadcrumb.value = `${section.name} > ${submenu.name}`
+    breadcrumb.value = `${section.breadcrum} > ${submenu.name}`
   }
 
   // Reset other submenus
@@ -213,7 +158,7 @@ function toggleSubmenu(sectionIndex: number, submenuIndex: number) {
 
 function selectSubmenu(section: Section, submenu: SubMenu, subsubmenu: SubSubMenu) {
   selectedSubmenu = subsubmenu
-  breadcrumb.value = `${section.name} > ${submenu.name} > ${subsubmenu.name}`
+  breadcrumb.value = `${section.breadcrum} > ${submenu.name} > ${subsubmenu.name}`
 }
 
 function collapseNav() {
@@ -226,52 +171,18 @@ function collapseNav() {
 
   <div class="docs-container">
 
-    <div class="left-nav">
-      <ul>
-
-        <router-link to="/">
-          <li :class="['first', path === '/' ? 'active' : '']">
-            <HouseSvg class="icon" />
-            <p>Home</p>
-          </li>
-        </router-link>
-
-        <router-link to="/docs">
-          <li :class="[path === '/docs' ? 'active' : '']" @click="collapseNav">
-            <FolderSvg class="icon" />
-            <p>Docs</p>
-          </li>
-        </router-link>
-
-        <router-link to="/components">
-          <li :class="[path === '/components' ? 'active' : '']">
-            <AddSvg class="icon" />
-            <p>Components</p>
-          </li>
-        </router-link>
-
-        <router-link to="/apis">
-          <li :class="[path === '/apis' ? 'active' : '']">
-            <ApiSvg class="icon" />
-            <p>Apis</p>
-          </li>
-        </router-link>
-
-      </ul>
-    </div>
+    <LeftSideBar :collapseNav="collapseNav" />
 
     <div :class="['navigation', navToggle ? 'nav-hide' : '', navToggle === false ? 'nav-show' : '']">
 
       <div class="nav-header">
-
         <div class="header-title">
-          Docs
+          Documents
         </div>
 
         <div class="icon-bg" @click="collapseNav">
           <ArrowDownSvg class="icon collapse" />
         </div>
-
       </div>
 
       <div class="nav" v-for="(section, index) in sections" :key="index">
@@ -282,7 +193,7 @@ function collapseNav() {
             <ArrowDownSvg class="icon" />
           </span>
 
-          <span>{{ section.name }}</span>
+          <span>{{ section.breadcrum }}</span>
 
         </div>
 
@@ -313,30 +224,65 @@ function collapseNav() {
 
     </div>
 
-    <div :class="['content', navToggle ? 'content-full' : '', navToggle === false ? 'content-half' : '']">
+    <div :class="['content', navToggle ? 'content-open' : '', navToggle === false ? 'content-closed' : '']">
 
       <div class="content-items">
-        <div v-if="showMessage">
-          <h2>Welcome Message</h2>
-          <p>This is the new message in the right row for the first render.</p>
-        </div>
 
-        <div v-if="selectedSection">
-          <h2 class="breadcrumb">{{ breadcrumb }}</h2>
-          <h2>{{ selectedSection.name }}</h2>
-          <p>{{ selectedSection.description }}</p>
-          <p v-if="!selectedSubmenu">{{ selectedSection.welcomeMessage }}</p>
-        </div>
+        <h1 v-if="selectedSection" class="breadcrumb">{{ breadcrumb }}</h1>
 
-        <div v-if="selectedSubmenu">
-          <!-- <h3>{{ (selectedSubmenu as any).content }}</h3> -->
-          <pre><code>{{ (selectedSubmenu as any).content }}</code></pre>
-          <div>
-            <TitleArrow title="about us" />
+        <div v-if="showMessage" class="home">
+          <h1 class="title">Documentation</h1>
 
+          <div class="article-title">
+            <ArrowDoubleTwoSvg class="icon add-icon" />
+            <h3>Installation</h3>
           </div>
 
+          <p class="description">
+            The documentation will is instended to guide the installation of our infraestructure services.
+          </p>
+
+          <div class="article-title">
+            <ArrowDoubleTwoSvg class="icon add-icon" />
+            <h3>Tools</h3>
+          </div>
+
+          <p class="description">Detail information of all of our Vue.js installation processes.</p>
+          <br />
+          <p class="description">Create consistent, intuitive interfaces ensures a unified user experience across all
+            your
+            products, making
+            interactions familiar and frictionless for your users.</p>
+
+          <div class="article-title">
+            <ArrowDoubleTwoSvg class="icon add-icon" />
+            <h3>Resources</h3>
+          </div>
+
+          <p>External information</p>
+
         </div>
+
+        <div v-if="selectedSection" class="title">
+          <h1>{{ selectedSection.title }}</h1>
+          <p>{{ selectedSection.description }}</p>
+        </div>
+
+        <div v-if="selectedSubmenu" class="description">
+
+          <div v-if="!selectedSubmenu.code">
+            <p v-for="(item, index) in selectedSubmenu.content" :key="index"> {{ item }}</p>
+          </div>
+
+          <code v-if="selectedSubmenu.code">
+            <pre>
+              <span v-for="(item, index) in selectedSubmenu.content" :key="index">
+                {{ item }}
+              </span>
+            </pre>
+          </code>
+        </div>
+
       </div>
 
     </div>

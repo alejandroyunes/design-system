@@ -4,9 +4,6 @@
   --mobile-width: 768px;
 
   // <--- COLORS ---> //
-  --primary: #006e95;
-  --indigo: #2c3e50;
-
   --white: #ffffff;
   --white-soft: #e7e3e3;
   --white-mute: #c7bebe;
@@ -20,6 +17,8 @@
   --gray-soft: #413d3d;
   --gray-mute: #575050;
 
+  --primary: #006e95;
+  --indigo: #2c3e50;
   --success: #3a802d;
   --info: #17a2b8;
   --warning: #ffc107;
@@ -38,12 +37,12 @@
   --divider-dark-2: rgba(84, 84, 84, 0.48);
 
   //left nav dark
-  --nav-light-1: rgba(37, 37, 37, 0.94);
+  --nav-light-1: rgb(37, 37, 37);
   --nav-light-2: rgba(0, 110, 149, 0.2);
   --nav-light-3: rgba(60, 60, 60, 0.384);
   --nav-light-4: rgba(60, 60, 60, 0.19);
   //left nav light
-  --nav-light-5: rgba(189, 189, 189, 0.94);
+  --nav-light-5: rgba(189, 189, 189, 0.397);
   --nav-light-6: rgba(0, 110, 149, 0.3);
   --nav-light-7: rgba(88, 88, 88, 0.288);
   --nav-light-8: rgba(97, 97, 97, 0.19);
