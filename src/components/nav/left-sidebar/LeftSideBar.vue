@@ -37,7 +37,7 @@ const { collapseNav } = defineProps<Props>()
       </router-link>
 
       <router-link to="/components">
-        <li :class="[path === '/components' ? 'active' : '']">
+        <li :class="[path === '/components' ? 'active' : '']" @click="collapseNav">
           <AddSvg class="icon" />
           <p>Components</p>
         </li>

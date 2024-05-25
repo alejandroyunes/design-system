@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import './right-nav.scss'
-import Twitter from '@/components/icons/social-media/TwitterSvg.vue'
 import ExitSvg from '@/components/icons/ExitSvg.vue'
-import Youtube from '@/components/icons/social-media/YoutubeSvg.vue'
-import Facebook from '@/components/icons/social-media/FacebookSvg.vue'
-import Instagram from '@/components/icons/social-media/InstagramSvg.vue'
+
+import HouseSvg from '@/components/icons/nav/HouseSvg.vue'
+import FolderSvg from '@/components/icons/nav/FolderSvg.vue'
+import AddSvg from '@/components/icons/nav/AddSvg.vue'
+import ApiSvg from '@/components/icons/nav/ApiSvg.vue'
 
 interface Props {
   toggleRightNav: () => void
@@ -16,9 +17,10 @@ const { toggleRightNav, isRightNavOpen } = defineProps<Props>()
 </script>
 
 <template>
-  <div :class="['right-nav-container', isRightNavOpen ? 'right-slide-in' : '', isRightNavOpen === false ? 'right-slide-out' : '']">
+  <div
+    :class="['right-nav-container', isRightNavOpen ? 'right-slide-in' : '', isRightNavOpen === false ? 'right-slide-out' : '']">
     <div class="right-nav-header">
-      <p class="title">Estrella <span class="title-strong">Immobilien</span></p>
+      <p class="title">NorthStar <span class="title-strong">DS</span></p>
 
       <div @click="toggleRightNav" class="animation-exit">
         <ExitSvg class="exit-icon" />
@@ -29,38 +31,38 @@ const { toggleRightNav, isRightNavOpen } = defineProps<Props>()
       <ul class="list">
         <li class="item">
           <span class="svg">
-            <Facebook class="icon" />
+            <HouseSvg class="icon" />
           </span>
-          <p class="link">Facebook</p>
+          <p class="link">Home</p>
         </li>
         <li class="item">
           <span class="svg">
-            <Instagram />
+            <FolderSvg class="icon" />
           </span>
-          <p class="link">Instagram</p>
+          <p class="link">Docs</p>
         </li>
         <li class="item">
           <span class="svg">
-            <Twitter />
+            <AddSvg class="icon" />
           </span>
-          <p class="link">Twitter</p>
+          <p class="link">Components</p>
         </li>
         <li class="item">
           <span class="svg">
-            <Youtube />
+            <ApiSvg class="icon" />
           </span>
-          <p class="link">Youtube</p>
+          <p class="link">Apis</p>
         </li>
       </ul>
 
       <div class="contact">
-        <p class="contact-tel"><a href="tel:+41787746337">+41 78 774 63 37</a></p>
+        <p class="contact-tel"><a href="tel:+41787746337">System Admin</a></p>
         <p class="contact-email">
-          <a href="mailto:matthias.schulz@estrella-immobilien.ch">matthias.schulz@estrella-immobilien.ch</a>
+          <a href="mailto:matthias.schulz@estrella-immobilien.ch">admin@northstarbrokers.ca</a>
         </p>
       </div>
     </div>
   </div>
 
-  <div v-if="isRightNavOpen" @click="toggleRightNav" class="right-nav-bg" ></div>
+  <div v-if="isRightNavOpen" @click="toggleRightNav" class="right-nav-bg"></div>
 </template>

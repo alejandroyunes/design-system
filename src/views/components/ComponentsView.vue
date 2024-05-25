@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import './docs.scss'
+import './components-view.scss'
 import { ref, reactive } from 'vue'
 
 import ArrowDownSvg from '@/components/icons/ArrowDownSvg.vue'
@@ -28,7 +28,6 @@ interface Section {
   submenus: SubMenu[]
 }
 
-
 const navToggle = ref<boolean | undefined>(undefined)
 
 let selectedSection: Section | null = null
@@ -39,98 +38,89 @@ let showMessage = true
 
 const sections: Section[] = reactive([
   {
-    breadcrum: 'EC2 + Nginx',
-    title: 'Creation of AWS EC2 instance',
-    description: 'The following information is intended to help implement an instance of EC2 with Nginx.',
+    breadcrum: 'Headers',
+    title: 'NavBars',
+    description: 'Here we can find the code for all navigation.',
     expanded: false,
     submenus: [
       {
-        name: 'Create a EC2 instance',
+        name: 'Two Row Header',
         expanded: false,
         subsubmenus: [
           {
-            name: 'Create Instance',
-            content: ["- Create an Amazon Linux 2 instance.", "- Log in to the AWS Management Console and ensure you've selected the desired region before launching the instance."]
+            name: 'Vue Code',
+            code: true,
+            content: ['hello'],
+            codeBody: [`import './header-component.scss'
+import { ref } from 'vue'
+import { setDarkMode } from '@/utils/utils'
+import RightNav from '@/components/sliders/right-nav/RightNav.vue'
+import SunSvg from '@/components/icons/header/SunSvg.vue'
+import MoonSvg from '@/components/icons/header/MoonSvg.vue'
+import HamburgerMenu from '@/components/icons/header/HamburgerSvg.vue'
+import HamburgerVerticalSvg from '@/components/icons/header/HamburgerVerticalSvg.vue'
+
+const isDarkMode = ref(localStorage.getItem('isDarkMode') === 'true')
+const isRightNavOpen = ref<boolean | undefined>(undefined)
+const isTopNavOpen = ref<boolean | undefined>(undefined)
+
+setDarkMode(isDarkMode.value)
+
+const handleTheme = () => {
+  isDarkMode.value = !isDarkMode.value
+  setDarkMode(isDarkMode.value)
+}
+
+const toggleRightNav = () => {
+  isRightNavOpen.value = !isRightNavOpen.value
+}
+
+const toggleTopNav = () => {
+  isTopNavOpen.value = !isTopNavOpen.value
+}
+
+<template>
+  <nav class="header-container">
+
+    <div class="header-left">
+      <HamburgerMenu @click="toggleTopNav" class="icon mobile-only hamburger" />
+      <TopNav :toggleTopNav="toggleTopNav" :isTopNavOpen="isTopNavOpen" />
+
+      <router-link to="/" class="link">
+        <span class="capital">NorthStar</span>
+        <span class="invest mobile-only">DS</span>
+        <span class="invest desktop-only">Design System</span>
+        <span class="invest desktop-only"></span>
+      </router-link>
+
+    </div>
+
+    <div class="header-right">
+
+      <div class="dark-mode-icons">
+        <MoonSvg v-if="!isDarkMode" @click="handleTheme" class="icon sun" />
+        <SunSvg v-else @click="handleTheme" class="icon moon" />
+      </div>
+
+      <div>
+        <HamburgerVerticalSvg @click="toggleRightNav" class="icon desktop-only" />
+        <RightNav :toggleRightNav="toggleRightNav" :isRightNavOpen="isRightNavOpen" />
+      </div>
+
+    </div>
+
+  </nav>
+</template>`]
           },
-          { name: 'Configuration', content: ['- Launch the Amazon Linux server, select the desired memory and disc memory, and finally create the .pem file.'] },
+          { name: 'View Component', content: ['- coming soon'] },
         ]
       },
       {
-        name: 'Dev installations',
+        name: 'Three Row Header',
         expanded: false,
         subsubmenus: [
           {
             name: 'Dependencies', code: true, codeBody: ['- sudo yum install -y nginx-<version>', '- sudo yum install npm -g (bun or pnpm)', '- sudo yum install nvm', '- nvm install 20.1.1', '- bun install pm2']
-          }
-        ]
-      }
-    ]
-  },
-  {
-    breadcrum: 'Fast Api',
-    title: 'Fast API implementation',
-    description: 'Installation instructions',
-    expanded: false,
-    submenus: [
-      {
-        name: 'Installation',
-        expanded: false,
-        subsubmenus: [
-          {
-            name: 'Python',
-            content: ["- Download the official installer from https://www.python.org/downloads/", "- Open a command prompt or terminal window and type 'python --version', you should see the version of python."]
-          },
-          {
-            name: 'Create virtual env',
-            code: true,
-            codeBody: [`# Create a virtual environment
-python -m venv venv
-
-# Activate the virtual environment
-# On Windows
-venv\\Scripts\\activate
-# On macOS/Linux
-source venv/bin/activate
-
-# Install FastAPI and Uvicorn in the virtual environment
-pip install fastapi uvicorn
-`]
-          },
-          { name: 'Typer installation', code: true, codeBody: ['pip install typer'] },
-        ]
-      },
-      {
-        name: 'Configuration',
-        expanded: false,
-        subsubmenus: [
-          {
-            name: 'Config main app',
-            content: ['- Install FastApi', '- Create a file main.py with:'],
-            code: true,
-            codeBody: [`from typing import Union
-
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}`]
-          },
-          { name: 'Run project', code: true, codeBody: ['pip install uvicorn', 'pip show fastapi', 'pip show uvicorn', 'uvicorn main:app --reload'], contentFooter: ["- Verify the port: http://127.0.0.1:8000/"] },
-        ]
-      },
-      {
-        name: 'OpenAPI Specification (OAS)',
-        expanded: false,
-        subsubmenus: [
-          {
-            name: 'Api Documentation',
-            content: ['http://127.0.0.1:8000/docs', '- Here you can see the documentation in OpenAPI Specification (OAS).'],
           }
         ]
       }
@@ -210,7 +200,7 @@ function collapseNav() {
 
       <div class="nav-header">
         <div class="header-title">
-          Documents
+          Components
         </div>
 
         <div class="icon-bg" @click="collapseNav">
@@ -264,11 +254,11 @@ function collapseNav() {
         <h1 v-if="selectedSection" class="breadcrumb">{{ breadcrumb }}</h1>
 
         <div v-if="showMessage" class="home">
-          <h1 class="title">Documentation</h1>
+          <h1 class="title">Components Docs</h1>
 
           <div class="article-title">
             <ArrowDoubleTwoSvg class="icon add-icon" />
-            <h3>Installation</h3>
+            <h3>Code</h3>
           </div>
 
           <p class="description">
@@ -318,7 +308,6 @@ function collapseNav() {
           <div v-if="selectedSubmenu.contentFooter">
             <p v-for="(item, index) in selectedSubmenu.contentFooter" :key="index"> {{ item }}</p>
           </div>
-
         </div>
 
       </div>

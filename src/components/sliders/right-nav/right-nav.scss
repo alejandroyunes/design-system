@@ -75,21 +75,24 @@
         color: var(--color-heading);
         cursor: pointer;
 
+        &:hover {
+          background-color: var(--color-nav-hover);
+        }
 
         @media (max-width: 1100px) {
           padding-left: 24px;
         }
-        &:hover {
-          background-color: var(--color-hover);
-        }
 
         .svg {
-          background-color: var(--white);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: var(--primary);
           width: 49px;
           height: 49px;
           cursor: pointer;
         }
-  
+
         .link {
           font-size: 18px;
           margin-left: 18px;
